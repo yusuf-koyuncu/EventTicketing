@@ -1,9 +1,63 @@
-# Event & Ticket Sales — Code First database layer
+# Event & Ticket Sales Platform
 
-.NET 10 · C# · EF Core 10 · SQL Server.
+A full-stack event and ticket sales platform: organizers publish events at venues with a fixed
+seating layout, customers pick seats and buy or cancel tickets, and admins track live occupancy
+and revenue.
 
-The original brief covered the domain and persistence layers only. An ASP.NET Core Web API is
-now being added on top of them in stages; section 10 tracks that work.
+**.NET 10 · ASP.NET Core Web API · EF Core 10 (Code First) · SQL Server · JWT · Angular 21**
+
+## Highlights
+
+- **Double booking is impossible.** A filtered unique index on active tickets, a per-seat
+  `UPDLOCK` row lock inside a transaction, and an application-level check all enforce it
+  (details in section 3).
+- **Venue layout, event inventory and event pricing are separate layers**, so one venue layout
+  serves every event and re-pricing one event never touches another.
+- **Numbered seats and general admission** are both supported.
+- **Ticket status history and price snapshots** record who bought what, when, at what price, and
+  whether the ticket is active or cancelled.
+- **JWT authentication with roles** (`Admin`, `Organizer`, `Customer`) and PBKDF2 password hashing.
+- **Layered architecture:** Core, Domain, DataAccess, Business and WebAPI, with a repository and
+  unit-of-work pattern, DTOs, AutoMapper, and centralized exception handling.
+- **Angular client:** event catalogue, interactive seat map, ticket purchase and cancellation,
+  admin event editor, and an occupancy and revenue panel.
+- 25 HTTP endpoints, every stage verified against a real SQL Server instance.
+
+## Quick start
+
+Requirements: .NET 10 SDK, SQL Server Express (`.\SQLEXPRESS`) and Node.js.
+
+```bash
+# 1. create the database and load sample data
+dotnet run --project tools/DbSeeder
+
+# 2. start the API (http://localhost:5080)
+dotnet run --project src/EventTicketing.WebAPI
+
+# 3. start the Angular client (http://localhost:4200)
+cd client
+npm install
+npm start
+```
+
+Sample accounts (all use the password `Passw0rd!`):
+
+| Email | Role |
+|---|---|
+| `admin@example.com` | Admin |
+| `organizer@novalive.example` | Organizer |
+| `alice@example.com` | Customer |
+
+To use a different SQL Server, change `ConnectionStrings:DefaultConnection` in
+`src/EventTicketing.WebAPI/appsettings.json` and set the `EVENTTICKETING_CONNECTION`
+environment variable for the seeder and `dotnet ef` (see section 7).
+
+The sections below document the design in detail: the schema, the concurrency strategy, and how
+the API and client were built stage by stage.
+
+---
+
+## Original brief
 
 Built to the brief: *design the database of an event and ticket sales platform with Code First.
 Organizers hold events at venues; venues have a fixed seating layout with seat numbers and

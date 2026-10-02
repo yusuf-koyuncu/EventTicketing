@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/events">
+      <i class="fa-solid fa-ticket"></i> EventTicketing
+    </a>
+
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/events" routerLinkActive="active">Etkinlikler</a>
+      </li>
+      @if (authService.isLoggedIn()) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/tickets/mine" routerLinkActive="active">Biletlerim</a>
+        </li>
+      }
+      @if (authService.hasRole('Admin', 'Organizer')) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/events/new" routerLinkActive="active">Yeni Etkinlik</a>
+        </li>
+      }
+    </ul>
+
+    <ul class="navbar-nav">
+      @if (authService.isLoggedIn()) {
+        <li class="nav-item navbar-text me-3">{{ authService.currentUser()?.fullName }}</li>
+        <li class="nav-item">
+          <button class="btn btn-outline-light btn-sm" (click)="logout()">Çıkış</button>
+        </li>
+      } @else {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Giriş</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">Kayıt</a>
+        </li>
+      }
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EventTicketing.Core/EventTicketing.Core.csproj" />
+    <Project Path="src/EventTicketing.Domain/EventTicketing.Domain.csproj" />
+    <Project Path="src/EventTicketing.DataAccess/EventTicketing.DataAccess.csproj" />
+    <Project Path="src/EventTicketing.Business/EventTicketing.Business.csproj" />
+    <Project Path="src/EventTicketing.WebAPI/EventTicketing.WebAPI.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/DbSeeder/DbSeeder.csproj" />
+  </Folder>
+</Solution>

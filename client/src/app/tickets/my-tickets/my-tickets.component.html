@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Biletlerim</h2>
+
+  @for (ticket of tickets(); track ticket.ticketId) {
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+          <div>
+            <h5 class="mb-1">{{ ticket.eventName }}</h5>
+            <p class="mb-1 text-muted">{{ ticket.venueName }} · {{ ticket.eventStartsAtUtc | date: 'medium' }}</p>
+            <p class="mb-1">{{ ticket.seatLabel }} · {{ ticket.categoryName }}</p>
+            <p class="mb-1">{{ ticket.pricePaid + ticket.serviceFeePaid }} {{ ticket.currency }}</p>
+            <span
+              class="badge"
+              [class.bg-success]="ticket.status === 'Active'"
+              [class.bg-secondary]="ticket.status !== 'Active'"
+            >
+              {{ ticket.status }}
+            </span>
+          </div>
+
+          @if (ticket.status === 'Active') {
+            <button class="btn btn-outline-danger btn-sm" (click)="cancel(ticket)">İptal Et</button>
+          }
+        </div>
+
+        <details class="mt-3">
+          <summary class="text-muted" style="cursor: pointer;">Durum Geçmişi</summary>
+          <ul class="list-unstyled mt-2 mb-0">
+            @for (step of ticket.history; track step.changedAtUtc) {
+              <li class="text-muted small">
+                {{ step.fromStatus ?? '-' }} → {{ step.toStatus }}
+                ({{ step.changedAtUtc | date: 'short' }}{{ step.reason ? ' · ' + step.reason : '' }})
+              </li>
+            }
+          </ul>
+        </details>
+      </div>
+    </div>
+  }
+
+  @if (tickets().length === 0) {
+    <p class="text-muted">Henüz bir biletiniz yok.</p>
+  }
+</div>

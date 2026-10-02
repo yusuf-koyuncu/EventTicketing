@@ -1,0 +1,154 @@
+<div class="container mt-4" style="max-width: 720px;">
+  <h2 class="mb-4">{{ eventId() === null ? 'Yeni Etkinlik' : 'Etkinliği Düzenle' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="saveEvent()">
+    <div class="mb-3">
+      <label class="form-label">Etkinlik Adı</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Mekan</label>
+        @if (eventId() === null) {
+          <select class="form-select" formControlName="venueId">
+            <option [value]="0" disabled>Seçiniz</option>
+            @for (venue of venues(); track venue.id) {
+              <option [value]="venue.id">{{ venue.name }}</option>
+            }
+          </select>
+        } @else {
+          <input type="text" class="form-control" [value]="venueName()" disabled />
+        }
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Organizatör</label>
+        <select class="form-select" formControlName="organizerId">
+          <option [value]="0" disabled>Seçiniz</option>
+          @for (organizer of organizers(); track organizer.id) {
+            <option [value]="organizer.id">{{ organizer.name }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label class="form-label">Tür</label>
+        <select class="form-select" formControlName="eventType">
+          <option value="Concert">Concert</option>
+          <option value="Sports">Sports</option>
+          <option value="Theatre">Theatre</option>
+          <option value="Conference">Conference</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Para Birimi</label>
+        <input type="text" class="form-control" formControlName="currency" maxlength="3" />
+      </div>
+
+      @if (eventId() !== null) {
+        <div class="col-md-4">
+          <label class="form-label">Durum</label>
+          <select class="form-select" formControlName="status">
+            <option value="Draft">Draft</option>
+            <option value="Published">Published</option>
+            <option value="OnSale">OnSale</option>
+            <option value="SoldOut">SoldOut</option>
+            <option value="Cancelled">Cancelled</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      }
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Başlangıç</label>
+        <input type="datetime-local" class="form-control" formControlName="startsAtUtc" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Bitiş</label>
+        <input type="datetime-local" class="form-control" formControlName="endsAtUtc" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Satış Başlangıcı</label>
+        <input type="datetime-local" class="form-control" formControlName="salesStartUtc" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Satış Bitişi</label>
+        <input type="datetime-local" class="form-control" formControlName="salesEndUtc" />
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">İptal Son Tarihi</label>
+      <input type="datetime-local" class="form-control" formControlName="cancellationCutoffUtc" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      {{ eventId() === null ? 'Oluştur' : 'Kaydet' }}
+    </button>
+  </form>
+
+  @if (eventId() !== null) {
+    <hr class="my-4" />
+
+    <h4>Kategori Fiyatları</h4>
+    @for (row of priceRows(); track row.seatCategoryId; let i = $index) {
+      <div class="row mb-2 align-items-center">
+        <div class="col-md-4">{{ row.categoryName }}</div>
+        <div class="col-md-4">
+          <input
+            type="number"
+            class="form-control"
+            [value]="row.price"
+            (input)="updatePriceRow(i, 'price', $any($event.target).value)"
+            placeholder="Fiyat"
+          />
+        </div>
+        <div class="col-md-4">
+          <input
+            type="number"
+            class="form-control"
+            [value]="row.serviceFee"
+            (input)="updatePriceRow(i, 'serviceFee', $any($event.target).value)"
+            placeholder="Hizmet Bedeli"
+          />
+        </div>
+      </div>
+    }
+
+    @if (priceRows().length > 0) {
+      <button type="button" class="btn btn-outline-primary mt-2" (click)="savePrices()">
+        Fiyatları Kaydet
+      </button>
+    }
+
+    <hr class="my-4" />
+
+    <h4>Afiş</h4>
+    @if (currentEvent()?.posterUrl) {
+      <img [src]="currentEvent()?.posterUrl" alt="Afiş" class="img-thumbnail mb-2" style="max-width: 240px;" />
+    }
+    <div class="d-flex gap-2 align-items-center">
+      <input type="file" class="form-control" accept="image/*" (change)="onPosterSelected($event)" style="max-width: 320px;" />
+      <button type="button" class="btn btn-outline-secondary" (click)="uploadPoster()">Yükle</button>
+    </div>
+
+    <hr class="my-4" />
+
+    @if (currentEvent()?.status === 'Draft') {
+      <button type="button" class="btn btn-success" (click)="publish()">Yayınla</button>
+      <button type="button" class="btn btn-outline-danger" (click)="delete()">Sil</button>
+    } @else {
+      <span class="badge bg-success">Yayınlandı</span>
+    }
+  }
+</div>

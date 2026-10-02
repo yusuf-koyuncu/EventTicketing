@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Etkinlikler</h2>
+
+  @if (result(); as result) {
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      @for (event of result.items; track event.id) {
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ event.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                {{ event.venueName }} · {{ event.venueCity }}
+              </h6>
+              <p class="card-text">
+                {{ event.startsAtUtc | date: 'medium' }}
+              </p>
+              <span class="badge bg-secondary">{{ event.status }}</span>
+            </div>
+            <div class="card-footer">
+              <a [routerLink]="['/events', event.id]" class="btn btn-primary btn-sm">
+                Detay
+              </a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    @if (result.items.length === 0) {
+      <p class="text-muted">Şu anda listelenecek etkinlik yok.</p>
+    }
+
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-outline-secondary" [disabled]="!result.hasPrevious" (click)="previousPage()">
+        Önceki
+      </button>
+      <span>Sayfa {{ result.page }} / {{ result.totalPages }}</span>
+      <button class="btn btn-outline-secondary" [disabled]="!result.hasNext" (click)="nextPage()">
+        Sonraki
+      </button>
+    </div>
+  }
+</div>

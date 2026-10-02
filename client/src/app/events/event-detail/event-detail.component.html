@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  @if (event(); as event) {
+    <div class="d-flex justify-content-between align-items-start">
+      <h2>{{ event.name }}</h2>
+      @if (authService.hasRole('Admin', 'Organizer')) {
+        <a [routerLink]="['/admin/events', event.id]" class="btn btn-outline-secondary btn-sm">
+          Düzenle
+        </a>
+      }
+    </div>
+    <p class="text-muted mb-1">{{ event.venueName }} · {{ event.venueAddress }}, {{ event.venueCity }}</p>
+    <p class="text-muted">{{ event.organizerName }}</p>
+
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <p><strong>Başlangıç:</strong> {{ event.startsAtUtc | date: 'medium' }}</p>
+        <p><strong>Bitiş:</strong> {{ event.endsAtUtc | date: 'medium' }}</p>
+        <p><strong>Durum:</strong> <span class="badge bg-secondary">{{ event.status }}</span></p>
+      </div>
+      <div class="col-md-6">
+        <h6>Kategori Fiyatları</h6>
+        <ul class="list-unstyled">
+          @for (price of event.prices; track price.seatCategoryId) {
+            <li>{{ price.categoryName }}: {{ price.price }} + {{ price.serviceFee }} {{ event.currency }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    @if (authService.hasRole('Admin', 'Organizer')) {
+      <app-occupancy [eventId]="event.id"></app-occupancy>
+    }
+
+    <h4>Koltuk Seçimi</h4>
+    <app-seat-map [eventId]="event.id"></app-seat-map>
+  }
+</div>

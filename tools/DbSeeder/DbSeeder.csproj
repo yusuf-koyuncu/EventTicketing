@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>EventTicketing.Tools.DbSeeder</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EventTicketing.Business\EventTicketing.Business.csproj" />
+    <ProjectReference Include="..\..\src\EventTicketing.DataAccess\EventTicketing.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

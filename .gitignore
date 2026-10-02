@@ -1,0 +1,19 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# Visual Studio
+.vs/
+
+# Node / Angular
+node_modules/
+client/.angular/
+
+# Claude Code local settings
+.claude/
+
+# OS
+Thumbs.db
+.DS_Store

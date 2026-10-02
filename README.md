@@ -1,29 +1,33 @@
-# Event & Ticket Sales Platform
+# 🎟 Event & Ticket Sales Platform
 
 A full-stack event and ticket sales platform: organizers publish events at venues with a fixed
 seating layout, customers pick seats and buy or cancel tickets, and admins track live occupancy
 and revenue.
 
-**.NET 10 · ASP.NET Core Web API · EF Core 10 (Code First) · SQL Server · JWT · Angular 21**
+![.NET](https://img.shields.io/badge/.NET_10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![EF Core](https://img.shields.io/badge/EF_Core_10-512BD4?style=for-the-badge&logo=nuget&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular_21-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 
-## Highlights
+## ✨ Highlights
 
-- **Double booking is impossible.** A filtered unique index on active tickets, a per-seat
+- 🔒 **Double booking is impossible.** A filtered unique index on active tickets, a per-seat
   `UPDLOCK` row lock inside a transaction, and an application-level check all enforce it
   (details in section 3).
-- **Venue layout, event inventory and event pricing are separate layers**, so one venue layout
+- 🧱 **Venue layout, event inventory and event pricing are separate layers**, so one venue layout
   serves every event and re-pricing one event never touches another.
-- **Numbered seats and general admission** are both supported.
-- **Ticket status history and price snapshots** record who bought what, when, at what price, and
+- 💺 **Numbered seats and general admission** are both supported.
+- 🕑 **Ticket status history and price snapshots** record who bought what, when, at what price, and
   whether the ticket is active or cancelled.
-- **JWT authentication with roles** (`Admin`, `Organizer`, `Customer`) and PBKDF2 password hashing.
-- **Layered architecture:** Core, Domain, DataAccess, Business and WebAPI, with a repository and
+- 🔑 **JWT authentication with roles** (`Admin`, `Organizer`, `Customer`) and PBKDF2 password hashing.
+- 🏛 **Layered architecture:** Core, Domain, DataAccess, Business and WebAPI, with a repository and
   unit-of-work pattern, DTOs, AutoMapper, and centralized exception handling.
-- **Angular client:** event catalogue, interactive seat map, ticket purchase and cancellation,
+- 🅰️ **Angular client:** event catalogue, interactive seat map, ticket purchase and cancellation,
   admin event editor, and an occupancy and revenue panel.
-- 25 HTTP endpoints, every stage verified against a real SQL Server instance.
+- ✅ 25 HTTP endpoints, every stage verified against a real SQL Server instance.
 
-## Quick start
+## 🚀 Quick start
 
 Requirements: .NET 10 SDK, SQL Server Express (`.\SQLEXPRESS`) and Node.js.
 
@@ -52,7 +56,7 @@ To use a different SQL Server, change `ConnectionStrings:DefaultConnection` in
 `src/EventTicketing.WebAPI/appsettings.json` and set the `EVENTTICKETING_CONNECTION`
 environment variable for the seeder and `dotnet ef` (see section 7).
 
-## Screenshots
+## 📸 Screenshots
 
 The client's interface is in Turkish.
 

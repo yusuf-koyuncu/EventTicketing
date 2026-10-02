@@ -52,6 +52,22 @@ To use a different SQL Server, change `ConnectionStrings:DefaultConnection` in
 `src/EventTicketing.WebAPI/appsettings.json` and set the `EVENTTICKETING_CONNECTION`
 environment variable for the seeder and `dotnet ef` (see section 7).
 
+## Screenshots
+
+The client's interface is in Turkish.
+
+| Event catalogue | Seat map (numbered seats and general admission) |
+|---|---|
+| ![Event list](docs/screenshots/01-event-list.png) | ![Seat map](docs/screenshots/02-seat-map.png) |
+
+| Admin: live occupancy and revenue | Admin: event editor and pricing |
+|---|---|
+| ![Occupancy panel](docs/screenshots/03-admin-occupancy.png) | ![Event editor](docs/screenshots/04-admin-event-editor.png) |
+
+| Customer: my tickets with status history |
+|---|
+| ![My tickets](docs/screenshots/05-my-tickets.png) |
+
 The sections below document the design in detail: the schema, the concurrency strategy, and how
 the API and client were built stage by stage.
 

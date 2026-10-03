@@ -14,7 +14,7 @@ and revenue.
 
 - 🔒 **Double booking is impossible.** A filtered unique index on active tickets, a per-seat
   `UPDLOCK` row lock inside a transaction, and an application-level check all enforce it
-  (details in section 3).
+  (details in section 3). A load test of 1,500 concurrent purchases on 20 seats sold each seat exactly once; with the protections removed the same test sold seats up to 100 times.
 - 🧱 **Venue layout, event inventory and event pricing are separate layers**, so one venue layout
   serves every event and re-pricing one event never touches another.
 - 💺 **Numbered seats and general admission** are both supported.
@@ -208,6 +208,23 @@ Three independent layers enforce it:
 **General admission** cannot use an index — no index expresses `COUNT(*) <= capacity`. The `EventSections` row is used as a mutex instead: `UPDLOCK` on it, count active tickets, insert, commit. Everyone buying that section serialises on one row, so the count cannot go stale between check and insert.
 
 **Why no `IsSold` column on `EventSeat`:** it would be a derived value with two writers (purchase and cancel) and would silently drift after any crash, manual fix or bulk import. Sold-ness is computed from the tickets, which are the financial record of truth.
+
+### Load test
+
+`tools/loadtest/double_booking_test.py` (Python standard library only) registers 100 users, then for each round releases 50 or 100 of them at the same instant (barrier, one keep-alive connection each) to buy the **same** reserved seat. 10 seats per concurrency level, 20 seats in total, 1,500 requests. Run against a throw-away database on one machine (API and SQL Server Express together), so the timings are optimistic compared with a real deployment.
+
+| Setup | 201 | 409 | Max active tickets on one seat |
+|---|---|---|---|
+| All three layers (the shipped code) | 20 | 1,480 | 1 |
+| Control A: unique index only (`UPDLOCK` and application check removed) | 20 | 1,480 | 1 |
+| Control B: no protection (index dropped too) | 1,500 | 0 | 100 |
+
+- With all layers, every seat was sold exactly once and no request failed with anything other than 409. The database was queried directly to confirm it. Average latency was 72.9 ms and p95 109.4 ms across all 1,500 requests.
+- Control A shows the index alone is sufficient; the lock and the application check only keep losers off the exception path.
+- Control B shows the test can detect double booking: with no protection, every seat was sold 50 or 100 times.
+- Not measured: the lock and the application check in isolation, and anything above 100 concurrent requests. Latency of the controls is not comparable to the shipped run (noisy, with a cold-start outlier in control A).
+
+Raw results are in `tools/loadtest/results*.json`.
 
 ---
 

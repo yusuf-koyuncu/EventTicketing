@@ -56,6 +56,39 @@ To use a different SQL Server, change `ConnectionStrings:DefaultConnection` in
 `src/EventTicketing.WebAPI/appsettings.json` and set the `EVENTTICKETING_CONNECTION`
 environment variable for the seeder and `dotnet ef` (see section 7).
 
+## 🏗 Architecture at a glance
+
+```
+Angular client ──HTTP/JWT──▶ WebAPI ──▶ Business ──▶ DataAccess ──▶ SQL Server
+                              │            │            │
+                              └────────────┴────────────┴──▶ Domain (entities, DTOs)  +  Core (contracts, security)
+```
+
+References point one way only: each layer knows the layer below it, never the one above. The Business
+layer holds the rules (sellable events, price lookup, cancellation cut-off), DataAccess holds EF Core,
+repositories, the unit of work and migrations, and WebAPI holds controllers, JWT and one exception
+middleware that turns domain errors into HTTP status codes.
+
+**Data model.** Venue layout, event inventory and event pricing are three separate layers (section 1),
+so one venue serves every event and re-pricing one event never touches another. A ticket stores a price
+snapshot and a status history, so the financial record never changes after the fact.
+
+**Double booking.** Three independent layers enforce it (section 3): a filtered unique index on active
+tickets (the authoritative one), a per-seat `UPDLOCK` row lock inside a transaction, and an
+application-level check that returns a clean 409 instead of a database error.
+
+**Load test.** `tools/loadtest/double_booking_test.py` sends 50 and 100 concurrent purchase requests for
+the same seat, 10 seats per level (1,500 requests, one machine):
+
+| Setup | Successful (201) | Rejected (409) | Max active tickets on one seat |
+|---|---|---|---|
+| All three layers | 20 | 1,480 | 1 |
+| Unique index only | 20 | 1,480 | 1 |
+| No protection | 1,500 | 0 | 100 |
+
+Average latency was 73 ms and p95 109 ms with all layers on. Method, controls and limits are in
+[the load test section](#load-test).
+
 ## 📸 Screenshots
 
 The client's interface is in Turkish.

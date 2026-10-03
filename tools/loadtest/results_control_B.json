@@ -1,0 +1,296 @@
+{
+  "summary": {
+    "rounds": 20,
+    "total_requests": 1500,
+    "rounds_with_exactly_one_success": 0,
+    "total_201": 1500,
+    "total_409": 0,
+    "total_other": 0,
+    "avg_ms": 139.0,
+    "p95_ms": 337.5,
+    "seats_tested": [
+      10,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      20,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      30
+    ]
+  },
+  "rounds": [
+    {
+      "concurrency": 50,
+      "seat": 10,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 832.7,
+      "p95_ms": 853.1,
+      "max_ms": 853.7
+    },
+    {
+      "concurrency": 50,
+      "seat": 3,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 54.4,
+      "p95_ms": 59.1,
+      "max_ms": 59.4
+    },
+    {
+      "concurrency": 50,
+      "seat": 4,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 47.0,
+      "p95_ms": 52.1,
+      "max_ms": 52.6
+    },
+    {
+      "concurrency": 50,
+      "seat": 5,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 59.7,
+      "p95_ms": 63.6,
+      "max_ms": 76.4
+    },
+    {
+      "concurrency": 50,
+      "seat": 6,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 19.1,
+      "p95_ms": 25.6,
+      "max_ms": 26.2
+    },
+    {
+      "concurrency": 50,
+      "seat": 7,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 21.4,
+      "p95_ms": 25.7,
+      "max_ms": 26.0
+    },
+    {
+      "concurrency": 50,
+      "seat": 8,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 29.3,
+      "p95_ms": 33.0,
+      "max_ms": 33.8
+    },
+    {
+      "concurrency": 50,
+      "seat": 9,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 17.3,
+      "p95_ms": 22.0,
+      "max_ms": 23.4
+    },
+    {
+      "concurrency": 50,
+      "seat": 11,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 251.3,
+      "p95_ms": 259.4,
+      "max_ms": 261.0
+    },
+    {
+      "concurrency": 50,
+      "seat": 20,
+      "codes": {
+        "201": 50
+      },
+      "success_201": 50,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 73.9,
+      "p95_ms": 80.7,
+      "max_ms": 82.1
+    },
+    {
+      "concurrency": 100,
+      "seat": 12,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 94.5,
+      "p95_ms": 126.1,
+      "max_ms": 129.9
+    },
+    {
+      "concurrency": 100,
+      "seat": 13,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 52.4,
+      "p95_ms": 68.1,
+      "max_ms": 70.6
+    },
+    {
+      "concurrency": 100,
+      "seat": 14,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 76.7,
+      "p95_ms": 89.0,
+      "max_ms": 93.7
+    },
+    {
+      "concurrency": 100,
+      "seat": 15,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 85.4,
+      "p95_ms": 97.3,
+      "max_ms": 101.7
+    },
+    {
+      "concurrency": 100,
+      "seat": 16,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 90.5,
+      "p95_ms": 106.4,
+      "max_ms": 109.1
+    },
+    {
+      "concurrency": 100,
+      "seat": 17,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 205.9,
+      "p95_ms": 220.5,
+      "max_ms": 224.4
+    },
+    {
+      "concurrency": 100,
+      "seat": 18,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 331.0,
+      "p95_ms": 342.1,
+      "max_ms": 344.1
+    },
+    {
+      "concurrency": 100,
+      "seat": 19,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 117.3,
+      "p95_ms": 214.0,
+      "max_ms": 225.2
+    },
+    {
+      "concurrency": 100,
+      "seat": 21,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 202.6,
+      "p95_ms": 219.2,
+      "max_ms": 221.0
+    },
+    {
+      "concurrency": 100,
+      "seat": 30,
+      "codes": {
+        "201": 100
+      },
+      "success_201": 100,
+      "conflict_409": 0,
+      "other": 0,
+      "avg_ms": 125.1,
+      "p95_ms": 136.5,
+      "max_ms": 141.4
+    }
+  ]
+}

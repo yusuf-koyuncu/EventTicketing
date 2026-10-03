@@ -1,0 +1,316 @@
+{
+  "summary": {
+    "rounds": 20,
+    "total_requests": 1500,
+    "rounds_with_exactly_one_success": 20,
+    "total_201": 20,
+    "total_409": 1480,
+    "total_other": 0,
+    "avg_ms": 112.7,
+    "p95_ms": 152.9,
+    "seats_tested": [
+      10,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      20,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      30
+    ]
+  },
+  "rounds": [
+    {
+      "concurrency": 50,
+      "seat": 10,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 1002.3,
+      "p95_ms": 1013.7,
+      "max_ms": 1015.1
+    },
+    {
+      "concurrency": 50,
+      "seat": 3,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 68.3,
+      "p95_ms": 88.0,
+      "max_ms": 89.9
+    },
+    {
+      "concurrency": 50,
+      "seat": 4,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 42.9,
+      "p95_ms": 64.3,
+      "max_ms": 64.8
+    },
+    {
+      "concurrency": 50,
+      "seat": 5,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 69.3,
+      "p95_ms": 94.0,
+      "max_ms": 97.3
+    },
+    {
+      "concurrency": 50,
+      "seat": 6,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 74.2,
+      "p95_ms": 88.4,
+      "max_ms": 88.9
+    },
+    {
+      "concurrency": 50,
+      "seat": 7,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 67.1,
+      "p95_ms": 82.5,
+      "max_ms": 82.7
+    },
+    {
+      "concurrency": 50,
+      "seat": 8,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 65.7,
+      "p95_ms": 81.1,
+      "max_ms": 82.1
+    },
+    {
+      "concurrency": 50,
+      "seat": 9,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 67.5,
+      "p95_ms": 82.2,
+      "max_ms": 83.5
+    },
+    {
+      "concurrency": 50,
+      "seat": 11,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 65.8,
+      "p95_ms": 80.7,
+      "max_ms": 81.9
+    },
+    {
+      "concurrency": 50,
+      "seat": 20,
+      "codes": {
+        "409": 49,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 49,
+      "other": 0,
+      "avg_ms": 63.3,
+      "p95_ms": 77.3,
+      "max_ms": 78.6
+    },
+    {
+      "concurrency": 100,
+      "seat": 12,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 86.2,
+      "p95_ms": 115.8,
+      "max_ms": 120.8
+    },
+    {
+      "concurrency": 100,
+      "seat": 13,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 90.3,
+      "p95_ms": 121.5,
+      "max_ms": 125.8
+    },
+    {
+      "concurrency": 100,
+      "seat": 14,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 91.7,
+      "p95_ms": 122.4,
+      "max_ms": 125.1
+    },
+    {
+      "concurrency": 100,
+      "seat": 15,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 91.9,
+      "p95_ms": 122.5,
+      "max_ms": 124.9
+    },
+    {
+      "concurrency": 100,
+      "seat": 16,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 95.4,
+      "p95_ms": 127.1,
+      "max_ms": 130.5
+    },
+    {
+      "concurrency": 100,
+      "seat": 17,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 69.3,
+      "p95_ms": 97.4,
+      "max_ms": 104.8
+    },
+    {
+      "concurrency": 100,
+      "seat": 18,
+      "codes": {
+        "201": 1,
+        "409": 99
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 81.7,
+      "p95_ms": 135.3,
+      "max_ms": 140.8
+    },
+    {
+      "concurrency": 100,
+      "seat": 19,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 131.2,
+      "p95_ms": 165.5,
+      "max_ms": 169.9
+    },
+    {
+      "concurrency": 100,
+      "seat": 21,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 75.3,
+      "p95_ms": 103.3,
+      "max_ms": 107.4
+    },
+    {
+      "concurrency": 100,
+      "seat": 30,
+      "codes": {
+        "409": 99,
+        "201": 1
+      },
+      "success_201": 1,
+      "conflict_409": 99,
+      "other": 0,
+      "avg_ms": 84.5,
+      "p95_ms": 116.7,
+      "max_ms": 124.7
+    }
+  ]
+}
